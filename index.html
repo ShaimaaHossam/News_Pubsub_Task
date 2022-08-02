@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Countries News</title>
+</head>
+
+<body>
+    <div class="swiper mySwiper">
+        <div id="swiperWrapper" class="swiper-wrapper">
+            <script type="x-tmpl-mustache" id="swiper_template">
+                {{#country}}
+                <div id="{{name}}" class="swiper-slide slide">
+                    <img src="{{flags.png}}" />
+                    <p class="card-title">{{name}}</p>
+                    <p class="card-capital">{{capital}}</p>
+                </div>
+              
+                {{/country}}
+            </script>
+        </div>
+        <div class="swiper-scrollbar"></div>
+        
+    </div>
+
+
+    <div id="display" class="display_container">
+        <script type="x-tmpl-mustache" id="display_template">
+            {{#slide}}
+                <div class="d-md-flex justify-content-around">
+                    <img class="display_img " src="{{flags.png}}" />
+                    <div class="text-white ms-3">
+                        <p class="disply-title">{{name}}</p>
+
+                        <div class="my-2">
+                            <p class="m-0">Capital: {{capital}}</p>
+                            {{#currencies}} 
+                            <p class="m-0">Currency: {{name}} </p>
+                            {{/currencies}}
+                            <p class="m-0">Languages: 
+                                {{#languages}}
+                                    <span>{{name}}</span>. 
+                                {{/languages}}
+                            </p>
+                            <p class="m-0">Population: {{population}} </p>
+                            <p class="m-0">Subregion: {{subregion}} </p>
+                            <p class="m-0">Timezone: 
+                                {{#timezones}}
+                                    <span>{{.}}</span>. 
+                                {{/timezones}}
+                            </p>
+                        </div>
+                       
+                    </div
+                </div>
+            {{/slide}}
+        </script>
+    </div>
+
+    <div id="news" class="text-white my-4">
+        <script type="x-tmpl-mustache" id="news_template">
+            {{#found}}
+                {{#articles}}
+                    <div class="news_container my-3 d-md-flex">
+                        <img class="w-25" src="{{urlToImage}}" alt="">
+                        <div>
+                            <p>{{title}}</p>
+                            <p>{{description}}</p>
+                        </div>
+                    </div>
+                {{/articles}}
+            {{/found}}
+            {{#empty}}
+                <p>No news were found for this country</p>
+            {{/empty}}
+        </script>
+    </div>
+
+
+
+
+
+
+    <!-- JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script id="carousel_config">
+        var swiper = new Swiper(".mySwiper", {
+            scrollbar: {
+                el: ".swiper-scrollbar",
+                hide: true,
+                draggable: true,
+            },
+            breakpoints: {
+                '@0.75': {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                '@1.00': {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                '@1.50': {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                },
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/script.js"></script>
+
+
+</body>
+
+</html>
